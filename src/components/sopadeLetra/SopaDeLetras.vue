@@ -36,12 +36,11 @@ import TopBar from '@/components/TopBar.vue'
 import MatrixLetras from '@/components/sopadeLetra/MatrixLetras.vue'
 import ListaPalabras from '@/components/sopadeLetra/ListaPalabras.vue'
 import IntroJuego from '@/components/IntroJuego.vue'
-import HCreditos from '@/components/sopadeLetra/HCreditos.vue'
 import {frases, palabras} from '@/assets/js/Recursos'
 
 export default {
 	name:'SopaDeLetras',
-	components:{TopBar, MatrixLetras, ListaPalabras, IntroJuego, HCreditos},
+	components:{TopBar, MatrixLetras, ListaPalabras, IntroJuego},
 	data: function(){
 		return {
 			frases: frases,
