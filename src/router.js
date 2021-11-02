@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SopaLetras from './components/sopadeLetra/SopaDeLetras.vue'
-import MemoryGame from './components/MemoryGame/game.vue'
+import GameAhorcado from './components/Ahorcado/GameAhorcado.vue'
+
 
 Vue.use(Router)
 
@@ -14,10 +15,11 @@ export default new Router({
       name: 'SopaLetras',
       component: SopaLetras
     },
+
     {
-      path: '/memoryGame',
-      name: 'memoryGame',
-      component: MemoryGame
+      path: '/GameAhorcado',
+      name: 'GameAhorcado',
+      component: GameAhorcado
     },
     /*{
       path: '/about',
