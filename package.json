@@ -8,9 +8,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
+    "@vue/reactivity": "^3.2.20",
     "animate.css": "^3.7.0",
     "bootstrap": "^4.3.1",
-    "vue": "^2.6.6"
+    "canvas-confetti": "^1.4.0",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.6",
+    "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
