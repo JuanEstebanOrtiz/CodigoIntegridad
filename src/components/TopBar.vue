@@ -35,13 +35,8 @@
 		</div>
 
 		<div class="py-1 col-12 col-sm-4">
-			<button class="btn btn-block btn-outline-info" @click="cambioTamano">
-				<!--<i class="fas fa-gamepad"></i>-->
-				<span class="ml-2">SIGUIENTE JUEGO</span>
-			</button>
+			<router-link to="/GameAhorcado" tag="button" class="btn btn-block btn-outline-info">SIGUIENTE JUEGO</router-link>
 		</div>
-
-		
 
 	</div>
 </template>

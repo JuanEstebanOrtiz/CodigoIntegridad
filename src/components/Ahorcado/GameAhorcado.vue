@@ -1,160 +1,138 @@
 <template>
-  <body>
-    <div id="app" class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="text-center text-info">JUEGO DE AHORCADO</h3>
-          <ul id="horizontal-list">
-            <button v-for="items in palabra_escrita" :key="items" type="button" class="btn btn-primary cuadro">
-              <span class="badge">{{items}}</span>
-            </button>
-          </ul>
-        </div>
-        <div class="container text-center">
-          <div class="col-sm-12">
-            <span>{{palabra_generada}}</span>
-            <span v-for="(letra, index) in letras" :key="index">
-              <!--<button @click="comparar(letra, index)"--> 
-              <button type="submit" @click="comparar(letra, index)" 
-                v-bind:disabled="botones[index]" 
-              >
-                {{letra}}
-              </button>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-8 col-sm-8 col-md-8">
-
-        </div>
-        <div class="co-xs-4 col-sm-4 col-md-4">
-          <label for="">ACIERTOS</label>
-          <input type="text" class="form-control" v-model="contador_aciertos">
-          <label for="">ERRORES</label>
-          <input type="text" class="form-control" v-model="contador_errores">
-          <!--<button v-on:click="generarAleatorio">Nuevo Juego</button>-->
-          <button type="submit" @click="recargar()">Nuevo Juego</button>
-        </div>
+  <div id="ahorcado">
+    <h1>Juego Del Ahorcado</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350px" height="260px" viewBox="0 0 350 275"
+      preserveAspectRatio="xMidYMid meet">
+      <line v-if="strikes > 0" x1="80" y1="257" x2="260" y2="257" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 1" x1="100" y1="257" x2="100" y2="40" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 2" x1="100" y1="40" x2="230" y2="40" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 3" x1="100" y1="80" x2="130" y2="40" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 4" x1="230" y1="40" x2="230" y2="80" style="stroke:black;fill:none;stroke-width:2px;" />
+      <circle v-if="strikes > 5" cx="230" cy="90" style="fill:khaki;stroke:black;stroke-width:2px;" r="20" />
+      <line v-if="strikes > 6" x1="230" y1="110" x2="230" y2="170" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 7" x1="230" y1="140" x2="250" y2="120" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 8" x1="230" y1="140" x2="210" y2="120" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 9" x1="230" y1="170" x2="250" y2="200" style="stroke:black;fill:none;stroke-width:2px;" />
+      <line v-if="strikes > 10" x1="230" y1="170" x2="210" y2="200" style="stroke:black;fill:none;stroke-width:2px;" />
+    </svg>
+    <div>
+      <div class="letter" v-for="letter in wordDisplayLetters" :key="letter">
+        {{letter}}
       </div>
     </div>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  </body>
+    <template v-if="initialized">
+      <div>
+        <div @click="tryLetter(letter)" class="possibleLetter" :class="getStrikethroughClass(letter)" v-for="letter in possibleLetters" :key="letter">
+          {{letter}}
+        </div>
+      </div>
+    </template>
+    <button @click="initialize()">New Game</button>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "GameAhorcado",
-  data: function(){
-    this.game=true,
-    this.win=false,
-    this.lost=false,
-    this.contador_aciertos=0,
-    this.contador_errores=0,
-    this.aleatorio=0,
-    this.palabra_escrita=[],
-    this.botones=[],
-    this.letras="ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    this.frutas=['manzana','cereza','mora','naranja']
-  },
-  methods: {
-    recargar: function(){
-      location.reload();
-    }, 
-    generarAleatorio:function(){
-      this.game=true,
-      this.win=false,
-      this.lost=false,
-      this.palabra_escrita=[],
-      this.botones=[],
-      this.contador_aciertos=0,
-      this.contador_errores=0,
-      this.aleatorio = Math.floor(Math.random()*this.frutas.length)
-      for(var i = 0; i<this.frutas[this.aleatorio].length;i++){
-        this.palabra_escrita.push('')
+
+  export default {
+    name: 'ahorcado',
+    data: function () {
+      return {
+        strikes: 12,
+        word: "AHORCADO",
+        wordLetters: ['A', 'H', 'O', 'R', 'C', 'A', 'D','O'],
+        wordDisplayLetters: ['A', 'H', 'O', 'R', 'C', 'A', 'D','O'],
+        usedLetters: [],
+        possibleLetters: ["A", "B", "C", "D", "E", "F", "G", "H", "I" , "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+        initialized: false,
+        wordBank: ['CASA']
       }
     },
-    comparar: function(letra, index){
-      alert("esta es la letra " + letra + " esta es la posicion "+ index)
-      if(this.game){
+    methods: {
+      initialize() {
+        this.initialized = true
+        this.strikes = 0
+        this.word = this.getRandomWord()
+        this.wordLetters = this.word.split('')
+        this.wordDisplayLetters = Array(this.word.length)
+        this.usedLetters = []
+      },
+      getRandomWord() {
+        let index = Math.random() * (this.wordBank.length - 0)
+        index = Math.floor(index)
         
-        this.botones[index]=true
-        for(var i=0;i<= this.palabra_generada.length;i++){
-          if(letra.toLowerCase()==this.palabra_generada[i]){
-            this.palabra_escrita[i] = letra
-            
-            this.contador_aciertos++
-          } 
+        let word = this.wordBank[index]
+        this.wordBank.splice(index, 1)
+
+        return word
+      },
+      tryLetter(letter) {
+        if (this.usedLetters.includes(letter)) {
+          return
         }
-        
+
+        this.usedLetters.push(letter)
+        let match = false
+
+        const res = this.wordLetters.some((x) => x === letter);
+        if(res){
+          const i = this.wordLetters.findIndex((x) => x === letter)
+          this.wordDisplayLetters.splice(i, 1, letter)
+          match = true
+        }
+
+        if (!match) {
+          this.strikes++
+          console.log(strikes);
+        }
+      },
+      getStrikethroughClass(letter) {
+        if (this.usedLetters.includes(letter)) {
+          return 'diagonal-strike'
+        }
+        return null
       }
     }
-    
-  },
-  computed: {
-    palabra_generada: function(){
-      return this.frutas[this.aleatorio]
-    }
-  },
-  created:function() {
-    this.generarAleatorio()
   }
-};
 </script>
 
-<style>
-html{
-  background-color: white;
-}
-#app {
-  background-color: #cecece;
-  border: 4px solid green;
-  border-radius: 5px;
-  padding-top: 10px;
+<style scoped>
+  #ahorcado {
+    text-align: center;
+  }
+
+.letter {
+  display: inline-block;
+  border-bottom: 1px solid;
+  margin: 0px 3px 0px 3px;
+  font-size: 30px;
+  min-width: 30px;
+  vertical-align: bottom;
 }
 
-.teclado{
-  margin-top: 5px;
-  margin-left: 4px;
-  width: 35px;
-  display: inline-grid;
-  border: 2px solid green;
-  border-radius: 100px;
-  background-color: #ebf5fb;
-  text-align: center;
+.possibleLetter {
+  display: inline-block;
+  margin: 10px 3px 0px 3px;
+  font-size: 30px;
+  min-width: 30px;
   cursor: pointer;
 }
 
-ul#horizontal-list li {
-  display: inline;
+.diagonal-strike {
+  background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%);
+  color: dimgrey;
 }
 
-ul#horizontal-list button {
-  margin-left: 10px;
-  width: 40px;
+button {
+  margin-top: 20px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-.cuadro {
-  width: 30px;
-  margin-left: 4px;
-  border: 4px solid #CC6600;
-  border-radius: 5px;
-  background: white;
-  color: blue;
-  height: 30px;
-  text-align: center;
-  padding-top: 3px;
-  padding-left: 3px;
-  font-size: 1em;
-}
-
-.rojo{
-  background-color: red;
-}
-
-.verde{
-  background-color: green;
+button:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
 }
 
 </style>

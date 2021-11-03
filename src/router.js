@@ -15,7 +15,6 @@ export default new Router({
       name: 'SopaLetras',
       component: SopaLetras
     },
-
     {
       path: '/GameAhorcado',
       name: 'GameAhorcado',
