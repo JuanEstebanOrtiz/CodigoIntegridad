@@ -22,7 +22,7 @@
     </div>
     <template v-if="initialized">
       <div>
-        <div @click="tryLetter(letter)" class="possibleLetter" :class="getStrikethroughClass(letter)" v-for="letter in possibleLetters" :key="letter">
+        <div @click="tryLetter(letter)" class="possibleLetter" :class="getStrikethroughClass(letter)" v-for="letter in letras" :key="letter">
           {{letter}}
         </div>
       </div>
@@ -42,9 +42,9 @@
         wordLetters: ['A', 'H', 'O', 'R', 'C', 'A', 'D','O'],
         wordDisplayLetters: ['A', 'H', 'O', 'R', 'C', 'A', 'D','O'],
         usedLetters: [],
-        possibleLetters: ["A", "B", "C", "D", "E", "F", "G", "H", "I" , "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+        letras: ["A", "B", "C", "D", "E", "F", "G", "H", "I" , "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
         initialized: false,
-        wordBank: ['CASA']
+        palabras: ['CASA']
       }
     },
     methods: {
@@ -57,11 +57,11 @@
         this.usedLetters = []
       },
       getRandomWord() {
-        let index = Math.random() * (this.wordBank.length - 0)
+        let index = Math.random() * (this.palabras.length - 0)
         index = Math.floor(index)
         
-        let word = this.wordBank[index]
-        this.wordBank.splice(index, 1)
+        let word = this.palabras[index]
+        this.palabras.splice(index, 1)
 
         return word
       },
