@@ -74,6 +74,12 @@
         let match = false
 
         const res = this.wordLetters.some((x) => x === letter);
+        /*if(res){
+          for(i=0;i<=this.wordLetters.length;i++){
+            this.wordDisplayLetters.splice(i, 1, letter)
+            match = true
+          }
+        }*/
         if(res){
           const i = this.wordLetters.findIndex((x) => x === letter)
           this.wordDisplayLetters.splice(i, 1, letter)

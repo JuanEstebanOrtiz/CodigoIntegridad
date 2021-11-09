@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SopaLetras from './components/sopadeLetra/SopaDeLetras.vue'
-import GameAhorcado from './components/Ahorcado/GameAhorcado.vue'
+import JuegoAhorcado from './components/Ahorcado/GameAhorcado.vue'
+import JuegoCrucigrama from './components/Crucigrama/JuegoCrucigrama.vue'
+import prueba from './components/Crucigrama/prueba.vue'
 
 
 Vue.use(Router)
@@ -16,10 +18,21 @@ export default new Router({
       component: SopaLetras
     },
     {
-      path: '/GameAhorcado',
-      name: 'GameAhorcado',
-      component: GameAhorcado
+      path: '/JuegoAhorcado',
+      name: 'JuegoAhorcado',
+      component: JuegoAhorcado
     },
+    {
+      path: '/JuegoCrucigrama',
+      name: 'JuegoCrucigrama',
+      component: JuegoCrucigrama
+    },
+    {
+      path: '/prueba',
+      name: 'prueba',
+      component: prueba
+    },
+
     /*{
       path: '/about',
       name: 'about',
