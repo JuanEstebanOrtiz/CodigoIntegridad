@@ -64,8 +64,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'"><sup>3</sup>j</td>
             <td></td>
+            <td class="'justicia'"><sup>3</sup>j</td>
             <td></td>
           </tr>
           <tr>
@@ -79,8 +79,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'">u</td>
             <td></td>
+            <td class="'justicia'">u</td>
             <td></td>
           </tr>
           <tr>
@@ -94,8 +94,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'">s</td>
             <td></td>
+            <td class="'justicia'">s</td>
             <td></td>
           </tr>
           <tr>
@@ -105,13 +105,13 @@
             <td></td>
             <td></td>
             <td class="'respecto'"><sup>2</sup> r</td>
-            <td class="'diligencia' 'respecto'">-</td>
-            <td class="'respecto'">-</td>
-            <td class="'respecto'">-</td>
-            <td class="'respecto'">-</td>
-            <td class="'respecto' 'justicia'">-</td>
-            <td class="'respecto'">-</td>
-            <td></td>
+            <td class="'diligencia' 'respecto'">e</td>
+            <td class="'respecto'">s</td>
+            <td class="'respecto'">p</td>
+            <td class="'respecto'">e</td>
+            <td class="'respecto'">c</td>
+            <td class="'respecto' 'justicia'">t</td>
+            <td class="'respecto'">o</td>
           </tr>
           <tr>
             <td></td>
@@ -124,8 +124,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'">i</td>
             <td></td>
+            <td class="'justicia'">i</td>
             <td></td>
           </tr>
           <tr>
@@ -139,8 +139,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'">c</td>
             <td></td>
+            <td class="'justicia'">c</td>
             <td></td>
           </tr>
           <tr>
@@ -154,23 +154,23 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="'justicia'">i</td>
             <td></td>
+            <td class="'justicia'">i</td>
             <td></td>
           </tr>
           <tr>
-            <td class="'honestida'"><sup>1</sup>h</td>
-            <td class="'compromiso' 'honestida'">0</td>
-            <td class="'honestida'">n</td>
-            <td class="'honestida'">e</td>
-            <td class="'honestida'">s</td>
-            <td class="'honestida'">t</td>
-            <td class="'honestida' 'diligencia'">i</td>
-            <td class="'honestida'">d</td>
-            <td class="'honestida'">a</td>
+            <td class="'honestidad'"><sup>1</sup>h</td>
+            <td class="'compromiso' 'honestidad'">0</td>
+            <td class="'honestidad'">n</td>
+            <td class="'honestidad'">e</td>
+            <td class="'honestidad'">s</td>
+            <td class="'honestidad'">t</td>
+            <td class="'honestidad' 'diligencia'">i</td>
+            <td class="'honestidad'">d</td>
+            <td class="'honestidad'">a</td>
+            <td class="'honestidad'">d</td>
             <td></td>
             <td class="'justicia'">a</td>
-            <td></td>
             <td></td>
           </tr>
           <tr>
@@ -234,11 +234,12 @@
     </v-row>
     <v-row>
       <v-col>
-        <table class="simple-table">
+        <table>
           <thead>
             <tr>
               <td style="color: black" colspan="3">#</td>
               <td style="color: black" colspan="3">Preguntas</td>
+              <td style="color: black" colspan="3">RTA</td>
             </tr>
           </thead>
           <tbody>
@@ -248,6 +249,14 @@
               </td>
               <td style="color: black" colspan="3">
                 {{ item.pregunta }}
+              </td>
+              <td colspan="3" class="p-2">
+                <v-btn
+                  style="background: black; color: white"
+                  @click="openModal()"
+                >
+                  Responder
+                </v-btn>
               </td>
             </tr>
           </tbody>
@@ -278,33 +287,30 @@
           </div>
       </v-col>
     </v-row>-->
-    <v-dialog 
-      v-model="dialog" 
-      fullscreen
-    >
-      <v-card>
-        <v-toolbar dark style="background: #007831; color: white">
-          <v-btn icon dark @click="dialog = false">
-            <v-icon color="white">mdi mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title
-            ><b>Ingresa tu Respuesta</b></v-toolbar-title
-          >
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn text color="white">
-              <v-icon> 
-                mdi-autorenew 
-              </v-icon>
-              Enviar
-            </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-        <v-container style="margin: 0">
-          <input type="text" placeholder="ingresar">
-        </v-container>
-      </v-card>
-    </v-dialog>
+    <div data-app>
+      <v-row justify="center">
+        <v-dialog v-model="dialog" scrollable max-width="300px">
+          <v-card>
+            <form action="javascript:null">
+              <v-card-title>Ingresa tu Respuesta</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text style="height: 50px">
+                <input type="text" placeholder="Digitar la Respuesta" />
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-btn style="background: black; color: white" text @click="dialog = false">
+                  Cerrar
+                </v-btn>
+                <v-btn style="background: black; color: white" text @click="checkAnswer()">
+                  Enviar
+                </v-btn>
+              </v-card-actions>
+            </form>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </div>
   </v-container>
 </template>
 
@@ -317,12 +323,12 @@ export default {
         {
           id: 1,
           pregunta: "pregunta 1",
-          respuesta: "justicia",
+          respuesta: "honestidad",
         },
         {
           id: 2,
           pregunta: "pregunta 2",
-          respuesta: "honesitda",
+          respuesta: "respecto",
         },
         {
           id: 3,
@@ -338,14 +344,17 @@ export default {
         {
           id: 1,
           pregunta: "pregunta 1",
+          respuesta: "compromiso",
         },
         {
           id: 2,
           pregunta: "pregunta 2",
+          respuesta: "diligencia",
         },
         {
           id: 3,
           pregunta: "pregunta 3",
+          respuesta: "justicia",
         },
       ],
     };
@@ -363,7 +372,7 @@ export default {
     validate: function () {
       alert(this.RHorizontal.respuesta);
     },
-    openModal: function() {
+    openModal: function () {
       this.dialog = true;
     },
   },
