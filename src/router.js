@@ -5,7 +5,6 @@ import JuegoAhorcado from './components/Ahorcado/GameAhorcado.vue'
 import JuegoCrucigrama from './components/Crucigrama/JuegoCrucigrama.vue'
 import prueba from './components/Crucigrama/prueba.vue'
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -26,20 +25,14 @@ export default new Router({
       path: '/JuegoCrucigrama',
       name: 'JuegoCrucigrama',
       component: JuegoCrucigrama
-    },
-    {
-      path: '/prueba',
-      name: 'prueba',
-      component: prueba
-    },
-
+    }
     /*{
       path: '/about',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about"  './views/About.vue')
+      component: () => import(/* webpackChunkName: "about" './views/About.vue')
     }*/
   ]
 })

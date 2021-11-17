@@ -251,7 +251,7 @@
                 {{ item.pregunta }}
               </td>
               <td colspan="3" class="p-2">
-                <v-btn
+                <v-btn id="btnRespuesta" 
                   style="background: black; color: white"
                   @click="openModal()"
                 >
@@ -263,30 +263,6 @@
         </table>
       </v-col>
     </v-row>
-    <!--<v-row>
-      <v-col>
-        <div class="content">
-            <form action="javascript:null">
-              <div class="input-div one">
-                <div class="i">
-                  <i class="fas fa-question"></i>
-                </div>
-                <div>
-                  <h5>Ingresar Palabra</h5>
-                  <input type="text" class="input" />
-                </div>
-              </div>
-              <button @click="checkAnswer()">Ingresar Respuesta</button>
-              <input
-                type="submit"
-                class="btn"
-                @click="checkAnswer()"
-                value="Ingresar Respuesta"
-              />
-            </form>
-          </div>
-      </v-col>
-    </v-row>-->
     <div data-app>
       <v-row justify="center">
         <v-dialog v-model="dialog" scrollable max-width="300px">
@@ -295,14 +271,14 @@
               <v-card-title>Ingresa tu Respuesta</v-card-title>
               <v-divider></v-divider>
               <v-card-text style="height: 50px">
-                <input type="text" placeholder="Digitar la Respuesta" />
+                <input id="txtRespuesta" type="text" placeholder="Digitar la Respuesta" />
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn style="background: black; color: white" text @click="dialog = false">
+                <v-btn  style="background: black; color: white" text @click="dialog = false">
                   Cerrar
                 </v-btn>
-                <v-btn style="background: black; color: white" text @click="checkAnswer()">
+                <v-btn style="background: black; color: white" text @click="checkAnswer() & activar()">
                   Enviar
                 </v-btn>
               </v-card-actions>
@@ -376,6 +352,9 @@ export default {
       this.dialog = true;
     },
   },
+  activar: function () {
+    document.getElementById('').disabled=true
+  }
 };
 </script>
 
